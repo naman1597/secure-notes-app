@@ -8,7 +8,9 @@ export default function App() {
   const { token } = useContext(AuthContext);
   const [showRegister, setShowRegister] = useState(false);
 
-  if (token) return <Dashboard />;
+  if (token) {
+    return <Dashboard />;
+  }
 
   return showRegister ? (
     <>
