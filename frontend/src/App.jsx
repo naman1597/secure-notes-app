@@ -1,16 +1,16 @@
-import { useContext, useState } from "react";
-import { AuthContext } from "./context/AuthContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 
 export default function App() {
-  const { token } = useContext(AuthContext);
-  const [showRegister, setShowRegister] = useState(false);
-
-  if (token) {
-    return <Dashboard />;
-  }
-
-  return showRegister ? <Register /> : <Login />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

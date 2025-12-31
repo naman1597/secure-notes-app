@@ -1,30 +1,29 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // error states
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [apiError, setApiError] = useState("");
 
-  const submit = async () => {
-    // reset errors
+  const navigate = useNavigate();
+
+  const handleRegister = async () => {
     setEmailError("");
     setPasswordError("");
     setApiError("");
 
     let isValid = true;
 
-    // Email validation
     if (!email.includes("@") || !email.includes(".")) {
       setEmailError("Please enter a valid email address");
       isValid = false;
     }
 
-    // Password validation
     if (password.length < 6) {
       setPasswordError("Password must be at least 6 characters");
       isValid = false;
@@ -39,8 +38,7 @@ export default function Register() {
       });
 
       alert("Registration successful. Please login.");
-      setEmail("");
-      setPassword("");
+      navigate("/");
     } catch (err) {
       setApiError("Registration failed. Email may already exist.");
     }
@@ -49,7 +47,20 @@ export default function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-6 rounded shadow w-80">
-        <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
+        <h2 className="text-xl font-bold mb-4 text-center">Secure Notes</h2>
+
+        {/* Tabs */}
+        <div className="flex mb-6">
+          <button
+            onClick={() => navigate("/")}
+            className="flex-1 py-2 bg-gray-200"
+          >
+            Login
+          </button>
+          <button className="flex-1 py-2 bg-blue-600 text-white">
+            Register
+          </button>
+        </div>
 
         {/* Email */}
         <div className="mb-3">
@@ -78,12 +89,11 @@ export default function Register() {
           )}
         </div>
 
-        {/* API Error */}
         {apiError && <p className="text-red-600 text-sm mb-2">{apiError}</p>}
 
         <button
-          className="bg-blue-500 text-white w-full p-2 rounded"
-          onClick={submit}
+          className="bg-blue-600 text-white w-full p-2 rounded"
+          onClick={handleRegister}
         >
           Register
         </button>
