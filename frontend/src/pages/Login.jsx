@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [authError, setAuthError] = useState("");
 
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -18,8 +20,8 @@ export default function Login() {
         password,
       });
 
-      localStorage.setItem("token", res.data.token);
-      window.location.href = "/dashboard";
+      login(res.data.token);
+      navigate("/dashboard");
     } catch (err) {
       setAuthError("Invalid email or password");
     }
