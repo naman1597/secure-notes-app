@@ -12,25 +12,5 @@ export default function App() {
     return <Dashboard />;
   }
 
-  return showRegister ? (
-    <>
-      <Register />
-      <p
-        className="text-center text-blue-500 cursor-pointer"
-        onClick={() => setShowRegister(false)}
-      >
-        Already have an account? Login
-      </p>
-    </>
-  ) : (
-    <>
-      <Login />
-      <p
-        className="text-center text-blue-500 cursor-pointer"
-        onClick={() => setShowRegister(true)}
-      >
-        New user? Register
-      </p>
-    </>
-  );
+  return showRegister ? <Register /> : <Login />;
 }
