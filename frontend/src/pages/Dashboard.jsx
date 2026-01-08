@@ -10,7 +10,7 @@ export default function Dashboard() {
   const [content, setContent] = useState("");
 
   const fetchNotes = async () => {
-    const res = await axios.get("http://localhost:5000/api/notes", {
+    const res = await axios.get("https://secure-notes-app-hm1u.onrender.com/api/notes", {
       headers: { Authorization: `Bearer ${token}` },
     });
     setNotes(res.data);
@@ -23,7 +23,7 @@ export default function Dashboard() {
     ).toString();
 
     await axios.post(
-      "http://localhost:5000/api/notes",
+      "https://secure-notes-app-hm1u.onrender.com/api/notes",
       { title, content: encrypted },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -35,7 +35,7 @@ export default function Dashboard() {
 
   const deleteNote = async (id) => {
     await axios.delete(
-      `http://localhost:5000/api/notes/${id}`,
+      `https://secure-notes-app-hm1u.onrender.com/api/notes/${id}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     fetchNotes();

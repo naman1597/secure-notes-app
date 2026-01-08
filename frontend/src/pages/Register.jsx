@@ -32,7 +32,7 @@ export default function Register() {
     if (!isValid) return;
 
     try {
-      await axios.post("http://localhost:5000/api/auth/register", {
+      await axios.post("https://secure-notes-app-hm1u.onrender.com/api/auth/register", {
         email,
         password,
       });
